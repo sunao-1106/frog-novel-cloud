@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="novel-home" />
+        <module name="novel-monitor" />
+        <module name="novel-common" />
+        <module name="novel-book" />
+        <module name="novel-gateway" />
+        <module name="novel-crawler" />
+        <module name="novel-user" />
+        <module name="novel-third-party" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="novel-book" options="-parameters" />
+      <module name="novel-common" options="-parameters" />
+      <module name="novel-crawler" options="-parameters" />
+      <module name="novel-gateway" options="-parameters" />
+      <module name="novel-home" options="-parameters" />
+      <module name="novel-monitor" options="-parameters" />
+      <module name="novel-third-party" options="-parameters" />
+      <module name="novel-user" options="-parameters" />
+    </option>
+  </component>
+</project>
