@@ -1,0 +1,14 @@
+server:
+  port: 10003
+spring:
+  application:
+    name: novel-crawler
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/frog-novel?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos服务注册

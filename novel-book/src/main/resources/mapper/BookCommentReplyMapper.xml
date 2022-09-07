@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sw.novel.book.dao.BookCommentReplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sw.novel.book.entity.BookCommentReplyEntity">
+        <id column="id" property="id" />
+        <result column="comment_id" property="commentId" />
+        <result column="reply_user" property="replyUser" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, comment_id, reply_user, is_deleted, create_time
+    </sql>
+
+</mapper>

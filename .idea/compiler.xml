@@ -12,6 +12,7 @@
         <module name="novel-common" />
         <module name="novel-book" />
         <module name="novel-gateway" />
+        <module name="mybatis-puls-generator" />
         <module name="novel-crawler" />
         <module name="novel-user" />
         <module name="novel-third-party" />
@@ -20,6 +21,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mybatis-puls-generator" options="-parameters" />
       <module name="novel-book" options="-parameters" />
       <module name="novel-common" options="-parameters" />
       <module name="novel-crawler" options="-parameters" />

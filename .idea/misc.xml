@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/novel-book/pom.xml" />
         <option value="$PROJECT_DIR$/novel-user/pom.xml" />
         <option value="$PROJECT_DIR$/novel-home/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-puls-generator/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sw.novel.book.dao.BookInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sw.novel.book.entity.BookInfoEntity">
+        <id column="id" property="id" />
+        <result column="book_name" property="bookName" />
+        <result column="category_id" property="categoryId" />
+        <result column="author_id" property="authorId" />
+        <result column="author_name" property="authorName" />
+        <result column="image" property="image" />
+        <result column="description" property="description" />
+        <result column="word_count" property="wordCount" />
+        <result column="view_count" property="viewCount" />
+        <result column="recent_chapter" property="recentChapter" />
+        <result column="is_finished" property="isFinished" />
+        <result column="is_free" property="isFree" />
+        <result column="status" property="status" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="creat_time" property="creatTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, book_name, category_id, author_id, author_name, image, description, word_count, view_count, recent_chapter, is_finished, is_free, status, is_deleted, creat_time, update_time
+    </sql>
+
+</mapper>
