@@ -32,4 +32,12 @@ public class BookInfoServiceImpl extends ServiceImpl<BookInfoMapper, BookInfoEnt
         this.save(bookInfoEntity);
         return bookInfoEntity.getId();
     }
+
+    @Override
+    public BookInfoTo getBookById(Long id) {
+        BookInfoTo bookInfoTo = new BookInfoTo();
+        BeanUtils.copyProperties(this.getById(id), bookInfoTo);
+        return bookInfoTo;
+    }
+
 }

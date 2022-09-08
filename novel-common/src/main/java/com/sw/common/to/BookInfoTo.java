@@ -48,5 +48,4 @@ public class BookInfoTo implements Serializable {
 
     private Date updateTime;
 
-
 }

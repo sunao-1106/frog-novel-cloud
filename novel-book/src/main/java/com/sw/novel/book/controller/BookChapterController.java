@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "BookChapterController", description = "小说章节业务")
 @RestController
-@RequestMapping("book/chapter")
+@RequestMapping("/book/chapter")
 public class BookChapterController {
 
     @Autowired

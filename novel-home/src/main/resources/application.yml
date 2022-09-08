@@ -1,8 +1,8 @@
 server:
-  port: 10003
+  port: 10004
 spring:
   application:
-    name: novel-crawler
+    name: novel-home
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://101.42.157.144:3306/frog-novel?useUnicode=true&characterEncoding=utf-8
@@ -12,3 +12,11 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848 # nacos服务注册
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # 解决swagger在高版本springboot无法访问问题
+  redis:
+    host: 101.42.157.144
+    port: 6379
+    database: 0
+

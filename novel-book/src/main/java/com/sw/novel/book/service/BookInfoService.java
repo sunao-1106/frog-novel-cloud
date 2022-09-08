@@ -19,4 +19,9 @@ public interface BookInfoService extends IService<BookInfoEntity> {
      * @return 添加成功后的bookId
      */
     Long saveBookInfo(BookInfoTo bookInfoTo);
+
+    /**
+     * 根据小说id获取小说信息
+     */
+    BookInfoTo getBookById(Long id);
 }

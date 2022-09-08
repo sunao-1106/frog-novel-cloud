@@ -8,6 +8,7 @@
 
 package com.sw.common.utils;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -24,6 +25,14 @@ public class R extends HashMap<String, Object> {
 	public R setData(Object data) {
 		this.put("data", data);
 		return this;
+	}
+
+	/**
+	 * 将当前map中存在的key为data的对象转化为指定类型对象返回
+	 */
+	public <T> T getData(Class<T> clazz) {
+		T data = JSON.parseObject(JSON.toJSONString(this.get("data")), clazz);
+		return data;
 	}
 
 	public R() {
