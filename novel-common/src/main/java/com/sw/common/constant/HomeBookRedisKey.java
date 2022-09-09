@@ -10,6 +10,6 @@ public interface HomeBookRedisKey {
     /**
      * 猜你喜欢
      */
-    String RECOMMEND_BOOK = "recommend_book_list";
+    String RECOMMEND_BOOK = "home_recommend_book_list";
 
 }
