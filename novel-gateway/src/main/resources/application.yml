@@ -1,0 +1,27 @@
+server:
+  port: 88
+spring:
+  application:
+    name: novel-gateway
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.42.157.144:3306/frog-novel?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos服务注册
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 开启网关动态路由功能 可以从注册中心通过服务名路由
+      # 网关路由规则
+      routes:
+        - id: home_route
+          uri: lb://novel-home
+          predicates:
+            - Path=/api/home/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), /$\{segment}  # 将路径中的api移除掉
+
