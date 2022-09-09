@@ -1,4 +1,4 @@
-package com.sw.novel.user.config;
+package com.sw.novel.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
