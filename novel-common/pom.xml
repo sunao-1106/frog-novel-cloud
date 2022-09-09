@@ -17,6 +17,11 @@
     </properties>
 
     <dependencies>
+        <!--jwt依赖-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
         <!-- spring-boot-starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
