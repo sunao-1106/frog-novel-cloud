@@ -97,13 +97,10 @@ public class BiQuGeCrawlerSource implements CrawlerSource {
         Element author = info.getElementsByTag("p").first();
 
         // 获取小说介绍
-        StringBuilder sb = new StringBuilder();
+        String description = null;
         Element intro = document.getElementById("intro");
         Elements p = intro.getElementsByTag("p");
-        for (Element element : p) {
-            // 添加分隔号 方便后续截串
-            sb.append(element.toString() + "/");
-        }
+        description = p.first().text();
 
         // 获取小说封面图片
         Element bookImage = document.getElementById("fmimg").getElementsByTag("img").first();
@@ -113,7 +110,7 @@ public class BiQuGeCrawlerSource implements CrawlerSource {
         // 封装信息
         bookInfoTo.setBookName(bookName.text());
         bookInfoTo.setAuthorName(author.text());
-        bookInfoTo.setDescription(sb.toString());
+        bookInfoTo.setDescription(description);
         bookInfoTo.setImage(src);
         return bookInfoTo;
     }

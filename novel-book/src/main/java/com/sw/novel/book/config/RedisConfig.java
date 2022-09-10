@@ -1,4 +1,4 @@
-package com.sw.novel.home.config;
+package com.sw.novel.book.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;

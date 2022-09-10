@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/crawler")
 public class CrawlerBookController {
 
+    private CrawlController controller = null;
+
     /**
      * 爬取指定小说的所有章节内容
      * @param url 小说详细页url
@@ -46,7 +48,7 @@ public class CrawlerBookController {
         // 规定了该网站哪些页面可以爬，哪些页面禁止爬，该类是对robots.txt规范的实现
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         // 实例化爬虫控制器
-        CrawlController controller = null;
+        //CrawlController controller = null;
         try {
             controller = new CrawlController(config, pageFetcher, robotstxtServer);
         } catch (Exception e) {
@@ -58,6 +60,22 @@ public class CrawlerBookController {
 
         // 启动爬虫
         controller.start(MyCrawler.class, numberOfCrawlers);
+        return R.ok();
+    }
+
+    /**
+     * 停止爬虫
+     */
+    @GetMapping("shutdown")
+    public R shutdown() {
+        try {
+            // 停止爬虫
+            controller.shutdown();
+            // 等待任务结束
+            controller.waitUntilFinish();
+        } catch (Exception e) {
+            return R.ok();
+        }
         return R.ok();
     }
 
