@@ -1,20 +1,20 @@
-package com.sw.novel.home.vo;
+package com.sw.novel.book.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author sunao
- * @since 2022/9/8
- * description: 展示首页小说
+ * @since 2022/9/11
+ * description: 展示小说详细信息
  */
 @Data
-public class HomeBookVo {
+public class BookDetailVo {
 
     @ApiModelProperty(value = "主键")
     private Long id;
@@ -31,6 +31,12 @@ public class HomeBookVo {
     @ApiModelProperty(value = "小说描述")
     private String description;
 
+    @ApiModelProperty(value = "小说总字数")
+    private Long wordCount;
+
+    @ApiModelProperty(value = "小说点击量")
+    private Long viewCount;
+
     @ApiModelProperty(value = "最新更新章节id")
     private Long recentChapterId;
 
@@ -38,19 +44,17 @@ public class HomeBookVo {
     private String recentChapterName;
 
     @ApiModelProperty(value = "最新更新章节时间")
-    @JsonFormat(pattern = "yyyy.MM.dd")
     private Date recentChapterUpdateTime;
 
-    @ApiModelProperty(value = "小说总字数")
-    private Long wordCount;
+    @ApiModelProperty(value = "是否完结，0：未完结，1：已完结")
+    private Integer isFinished;
 
-    @ApiModelProperty(value = "小说点击量")
-    private Long viewCount;
+    @ApiModelProperty(value = "是否免费，0：免费，1：vip")
+    private Integer isFree;
 
-    @ApiModelProperty(value = "创建时间 ")
-    private Date creatTime;
+    @ApiModelProperty(value = "小说章节信息")
+    private List<BookChapterVo> bookChapterVoList;
 
-    @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
-
+    @ApiModelProperty("小说评论信息")
+    private List<BookCommentVo> bookCommentVoList;
 }

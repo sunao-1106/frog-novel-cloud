@@ -95,6 +95,7 @@ public class BiQuGeCrawlerSource implements CrawlerSource {
 
         // 获取小说作者
         Element author = info.getElementsByTag("p").first();
+        String authorName = author.text().substring(author.text().indexOf("：") + 1);
 
         // 获取小说介绍
         String description = null;
@@ -109,7 +110,7 @@ public class BiQuGeCrawlerSource implements CrawlerSource {
 
         // 封装信息
         bookInfoTo.setBookName(bookName.text());
-        bookInfoTo.setAuthorName(author.text());
+        bookInfoTo.setAuthorName(authorName);
         bookInfoTo.setDescription(description);
         bookInfoTo.setImage(src);
         return bookInfoTo;

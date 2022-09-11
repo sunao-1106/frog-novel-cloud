@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
  * @version 1.0
  * Create by 2022/9/6 22:00
  */
-@Configuration
+//@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //                //设置全部请求都要被认证
 //                // .anyRequest().authenticated();
+        //禁用csrf保护
 
     }
 

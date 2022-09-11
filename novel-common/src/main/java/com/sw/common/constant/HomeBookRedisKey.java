@@ -25,9 +25,19 @@ public interface HomeBookRedisKey {
     String HOT_IN_WEEK_BOOK = "home_hot_in_week_book_list";
 
     /**
-     * 本周热度榜小说
+     * 本月热度榜小说
      */
     String HOT_IN_MONTH_BOOK = "home_hot_in_month_book_list";
+
+    /**
+     * 最新更新小说
+     */
+    String RECENT_UPDATE_BOOK = "home_recent_update_book_list";
+
+    /**
+     * 最新更新小说缓存过期时间：1天
+     */
+    Duration TIMEOUT_RECENT_UPDATE = Duration.ofSeconds(60 * 60 * 24);
 
     /**
      * 首页小说缓存过期时间: 3天

@@ -30,6 +30,9 @@ public class BookCommentReplyEntity implements Serializable {
       @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty("回复内容")
+    private String replyContent;
+
     @ApiModelProperty(value = "评论id")
     private Long commentId;
 

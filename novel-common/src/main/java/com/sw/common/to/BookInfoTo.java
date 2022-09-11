@@ -1,5 +1,6 @@
 package com.sw.common.to;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -33,6 +34,12 @@ public class BookInfoTo implements Serializable {
     private Long wordCount;
 
     private Long viewCount;
+
+    private Long recentChapterId;
+
+    private String recentChapterName;
+
+    private Date recentChapterUpdateTime;
 
     private Long recentChapter;
 

@@ -3,6 +3,9 @@ package com.sw.novel.book.service;
 import com.sw.common.to.BookInfoTo;
 import com.sw.novel.book.entity.BookInfoEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sw.novel.book.vo.BookDetailVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -30,4 +33,14 @@ public interface BookInfoService extends IService<BookInfoEntity> {
      * @param viewCountOnceAdd 每点击一次增加的浏览量
      */
     void addViewCountByBookId(Long bookId, Integer viewCountOnceAdd);
+
+    /**
+     * 查询最新更新章节小说
+     */
+    List<BookInfoTo> getRecentUpdateBookList();
+
+    /**
+     * 通过小说id获取其详细信息，包括小说目录章节、小说评论
+     */
+    BookDetailVo getBookDetailById(Long id);
 }

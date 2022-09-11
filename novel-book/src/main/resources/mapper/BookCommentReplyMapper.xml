@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.sw.novel.book.entity.BookCommentReplyEntity">
         <id column="id" property="id" />
         <result column="comment_id" property="commentId" />
+        <result column="reply_content" property="replyContent"></result>
         <result column="reply_user" property="replyUser" />
         <result column="is_deleted" property="isDeleted" />
         <result column="create_time" property="createTime" />
@@ -13,7 +14,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, comment_id, reply_user, is_deleted, create_time
+        id, comment_id, reply_content, reply_user, is_deleted, create_time
     </sql>
 
 </mapper>

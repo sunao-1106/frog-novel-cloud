@@ -3,8 +3,8 @@ package com.sw.novel.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sw.common.utils.R;
 import com.sw.novel.entity.User;
 import com.sw.novel.service.UserService;
 import com.sw.novel.service.impl.UserServiceImpl;
@@ -25,7 +25,7 @@ import java.util.List;
 
 @Api(tags = "UserController",description = "用户接口")
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController extends ApiController {
 
     /**
@@ -40,14 +40,19 @@ public class UserController extends ApiController {
     /**
      * 登录接口
      */
-    @PreAuthorize("hasAuthority('abc')")
+    //@PreAuthorize("hasAuthority('abc')")
     @PostMapping("/login")
-    public com.sw.common.utils.R Login(
+    public R Login(
             @RequestBody User user
     ){
 
         return  userService.login(user);
 
+    }
+
+    @RequestMapping("/test02")
+    public R test02() {
+        return R.ok();
     }
 
 
@@ -60,51 +65,51 @@ public class UserController extends ApiController {
      */
     @GetMapping
     public R selectAll(Page<User> page, User user) {
-        return success(this.userService.page(page, new QueryWrapper<>(user)));
+        return R.ok();
     }
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("{id}")
-    public R selectOne(@PathVariable Serializable id) {
-        return success(this.userService.getById(id));
-    }
-
-    /**
-     * 新增数据
-     *
-     * @param user 实体对象
-     * @return 新增结果
-     */
-    @PostMapping
-    public R insert(@RequestBody User user) {
-        return success(this.userService.save(user));
-    }
-
-    /**
-     * 修改数据
-     *
-     * @param user 实体对象
-     * @return 修改结果
-     */
-    @PutMapping
-    public R update(@RequestBody User user) {
-        return success(this.userService.updateById(user));
-    }
-
-    /**
-     * 删除数据
-     *
-     * @param idList 主键结合
-     * @return 删除结果
-     */
-    @DeleteMapping
-    public R delete(@RequestParam("idList") List<Long> idList) {
-        return success(this.userService.removeByIds(idList));
-    }
+//    /**
+//     * 通过主键查询单条数据
+//     *
+//     * @param id 主键
+//     * @return 单条数据
+//     */
+//    @GetMapping("{id}")
+//    public R selectOne(@PathVariable Serializable id) {
+//        return success(this.userService.getById(id));
+//    }
+//
+//    /**
+//     * 新增数据
+//     *
+//     * @param user 实体对象
+//     * @return 新增结果
+//     */
+//    @PostMapping
+//    public R insert(@RequestBody User user) {
+//        return success(this.userService.save(user));
+//    }
+//
+//    /**
+//     * 修改数据
+//     *
+//     * @param user 实体对象
+//     * @return 修改结果
+//     */
+//    @PutMapping
+//    public R update(@RequestBody User user) {
+//        return success(this.userService.updateById(user));
+//    }
+//
+//    /**
+//     * 删除数据
+//     *
+//     * @param idList 主键结合
+//     * @return 删除结果
+//     */
+//    @DeleteMapping
+//    public R delete(@RequestParam("idList") List<Long> idList) {
+//        return success(this.userService.removeByIds(idList));
+//    }
 }
 

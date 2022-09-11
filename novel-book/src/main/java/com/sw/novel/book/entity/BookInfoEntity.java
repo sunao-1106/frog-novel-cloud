@@ -55,7 +55,13 @@ public class BookInfoEntity implements Serializable {
     private Long viewCount;
 
     @ApiModelProperty(value = "最新更新章节id")
-    private Long recentChapter;
+    private Long recentChapterId;
+
+    @ApiModelProperty(value = "最新更新章节名")
+    private String recentChapterName;
+
+    @ApiModelProperty(value = "最新更新章节时间")
+    private Date recentChapterUpdateTime;
 
     @ApiModelProperty(value = "是否完结，0：未完结，1：已完结")
     private Integer isFinished;

@@ -2,9 +2,11 @@ package com.sw.novel.book.service.impl;
 
 import com.sw.common.to.BookChapterTo;
 import com.sw.novel.book.dao.BookContentMapper;
+import com.sw.novel.book.dao.BookInfoMapper;
 import com.sw.novel.book.entity.BookChapterEntity;
 import com.sw.novel.book.dao.BookChapterMapper;
 import com.sw.novel.book.entity.BookContentEntity;
+import com.sw.novel.book.entity.BookInfoEntity;
 import com.sw.novel.book.service.BookChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +29,9 @@ public class BookChapterServiceImpl extends ServiceImpl<BookChapterMapper, BookC
     @Autowired
     private BookContentMapper bookContentMapper;
 
+    @Autowired
+    private BookInfoMapper bookInfoMapper;
+
     @Override
     public void saveChapter(BookChapterTo chapterTo) {
         // TODO 判断当前章节是否在表中已存在
@@ -44,5 +49,13 @@ public class BookChapterServiceImpl extends ServiceImpl<BookChapterMapper, BookC
         bookContentEntity.setChapterId(bookChapterEntity.getId());
         // 添加到数据库
         bookContentMapper.insert(bookContentEntity);
+
+        // 将该章节更新为book_info表中的最新章节字段
+        BookInfoEntity bookInfoEntity = new BookInfoEntity();
+        bookInfoEntity.setId(bookChapterEntity.getBookId());
+        bookInfoEntity.setRecentChapterId(bookChapterEntity.getId());
+        bookInfoEntity.setRecentChapterName(bookChapterEntity.getChapterName());
+        bookInfoEntity.setRecentChapterUpdateTime(new Date());
+        bookInfoMapper.updateById(bookInfoEntity);
     }
 }

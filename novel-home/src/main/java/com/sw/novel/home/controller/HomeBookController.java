@@ -46,4 +46,18 @@ public class HomeBookController {
         return R.ok().setData(homeBookVoList);
     }
 
+    @ApiOperation("获取首页本月热度榜小说列表")
+    @GetMapping("/month")
+    public R hotInMonth() {
+        List<HomeBookVo> homeBookVoList = homeBookService.getHotInMonthBookList();
+        return R.ok().setData(homeBookVoList);
+    }
+
+    @ApiOperation("获取首页最新更新小说")
+    @GetMapping("/recent")
+    public R recentUpdateBook() {
+        List<HomeBookVo> homeBookVoList = homeBookService.getRecentUpdateBookList();
+        return R.ok().setData(homeBookVoList);
+    }
+
 }

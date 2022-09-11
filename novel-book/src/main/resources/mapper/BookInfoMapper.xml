@@ -13,7 +13,9 @@
         <result column="description" property="description" />
         <result column="word_count" property="wordCount" />
         <result column="view_count" property="viewCount" />
-        <result column="recent_chapter" property="recentChapter" />
+        <result column="recent_chapter_id" property="recentChapterId" />
+        <result column="recent_chapter_name" property="recentChapterName" />
+        <result column="recent_chapter_update_time" property="recentChapterUpdateTime" />
         <result column="is_finished" property="isFinished" />
         <result column="is_free" property="isFree" />
         <result column="status" property="status" />
@@ -24,11 +26,19 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, book_name, category_id, author_id, author_name, image, description, word_count, view_count, recent_chapter, is_finished, is_free, status, is_deleted, creat_time, update_time
+        id, book_name, category_id, author_id, author_name, image, description, word_count, view_count, recent_chapter_id, recent_chapter_name, recent_chapter_update_time, is_finished, is_free, status, is_deleted, creat_time, update_time
     </sql>
 
     <insert id="addViewCountByBookId">
         update book_info set view_count=view_count + #{count} where id=#{id}
     </insert>
+
+    <select id="getRecentUpdateBookList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM `book_info`
+        ORDER BY recent_chapter_update_time DESC
+        LIMIT 0, #{limit}
+    </select>
 
 </mapper>

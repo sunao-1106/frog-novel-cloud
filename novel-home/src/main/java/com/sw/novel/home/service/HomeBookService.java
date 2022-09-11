@@ -1,5 +1,6 @@
 package com.sw.novel.home.service;
 
+import com.sw.common.to.BookInfoTo;
 import com.sw.novel.home.entity.HomeBookEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sw.novel.home.vo.HomeBookVo;
@@ -37,4 +38,20 @@ public interface HomeBookService extends IService<HomeBookEntity> {
      */
     @Transactional
     void saveHotBooksInWeek(List<Long> bookIdList);
+
+    /**
+     * 获取首页本月热度榜小说列表
+     */
+    List<HomeBookVo> getHotInMonthBookList();
+
+    /**
+     * 获取首页最新更新小说列表
+     */
+    List<HomeBookVo> getRecentUpdateBookList();
+
+    /**
+     * 更新首页最新更新小说列表
+     */
+    @Transactional
+    void updateRecentUpdateBookList(List<BookInfoTo> bookInfoToList);
 }

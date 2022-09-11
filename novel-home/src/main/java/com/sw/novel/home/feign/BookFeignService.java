@@ -13,7 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("novel-book")
 public interface BookFeignService {
 
-    @GetMapping("book/info/get/{id}")
+    /**
+     * 根据id查询小说详细信息
+     */
+    @GetMapping("/book/info/get/{id}")
     R getBookInfoById(@PathVariable("id") Long id);
 
+    /**
+     * 查询最新更新章节小说
+     */
+    @GetMapping("/book/info/recent")
+    R getRecentUpdateBook();
 }
