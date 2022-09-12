@@ -36,10 +36,17 @@
         <fast-json.version>1.2.79</fast-json.version>
         <hutool.version>4.5.7</hutool.version>
         <JWT.version>0.9.0</JWT.version>
+        <qiniu.version>7.1.1</qiniu.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--   七牛云存储云  -->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu.version}</version>
+            </dependency>
             <!--   JWT  -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>

@@ -1,24 +1,29 @@
+server:
+  port: 4444
 spring:
+  application:
+    name: novel-user
   datasource:
     username: root
     password: root
     url: jdbc:mysql://localhost:3306/frog-nove?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
 #    url: jdbc:mysql://101.42.157.144:3306/frog-nove?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
-        service: user
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-server:
-  port: 4444
+oss:
+  accessKey: FtJ5tqcY6d0ls6pHXNadt4oqQ_keBsKtjmoSs37R
+  secretKey: V3ahyM8MhqMw_nH-M2vv5w6ENx3MWho94GF5tT7_
+  bucket: haiwaifds
+
+
