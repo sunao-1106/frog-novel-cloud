@@ -1,11 +1,15 @@
 package com.sw.novel.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author 万先生
@@ -13,8 +17,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
  * Create by 2022/9/6 22:00
  */
 @Configuration
+@ComponentScan("com.sw.novel")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    @Autowired
+//    JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,22 +36,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                //更改默认的登录页面
 //                .loginPage("/login");
 
-
                 //登录成功后的跳转页面
                 //.successForwardUrl("/toMain")
 
-        //授权认证
-//        http.authorizeHttpRequests()
-//                // login 无需认证
-//                .antMatchers("login").permitAll();
-//                //权限认证                 可以访问的页面             需要的权限（区分大小写 可以多个）
-//              //  .antMatchers("/mian").hasAnyAuthority("admin","admin01")
-//                //角色控制                                          需要角色
-//              //  .antMatchers("main").hasAnyRole("abc");
-//
-//                //设置全部请求都要被认证
-//                // .anyRequest().authenticated();
+        //禁用csrf保护
+        http.csrf().disable();
 
+        http.authorizeRequests()
+                .antMatchers("/user/*").permitAll()
+                //上传接口
+                .antMatchers("/*").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().and().httpBasic();
+
+        //把token校验过滤器添加到过滤器链中
+      //  http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     /**
@@ -60,4 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    //权限不足时执行
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return ((request, response, accessDeniedException) -> {
+            System.out.println("======================================"+request);
+      });
+
+    }
 }

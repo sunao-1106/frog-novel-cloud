@@ -1,5 +1,7 @@
 package com.sw.novel.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,8 +46,10 @@ public class User extends Model<User> implements Serializable {
     //状态，0：正常
     private Integer status;
     //创建时间
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
     //更新时间
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
     /**
