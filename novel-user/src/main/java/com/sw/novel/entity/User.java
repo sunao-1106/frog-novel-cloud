@@ -1,7 +1,9 @@
 package com.sw.novel.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,9 +25,11 @@ import java.util.Date;
 
 public class User extends Model<User> implements Serializable {
 
-    private static final long serialVersionUID = 2095216118;
+    private static final long serialVersionUID = 295216118;
 
     //主键
+
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
     //用户角色
     private Long userRole;

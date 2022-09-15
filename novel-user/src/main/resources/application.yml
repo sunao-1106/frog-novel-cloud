@@ -6,7 +6,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/frog-nove?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://101.42.157.144:3306/frog-novel?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
 #    url: jdbc:mysql://101.42.157.144:3306/frog-nove?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sw.common.utils.R;
 import com.sw.novel.entity.User;
+import com.sw.novel.entity.vo.UserVo;
 import com.sw.novel.service.UploadService;
 import com.sw.novel.service.UserService;
 import io.swagger.annotations.Api;
@@ -78,7 +79,26 @@ public class UserController extends ApiController {
         return userService.Register(user);
     }
 
+    /**
+     * 用户信息
+     */
+    @GetMapping("/UserInfo")
+    public R UserInfo(){
+        return userService.UserInfo();
+    }
 
+    /**
+     * 用户浏览记录
+     */
+    @GetMapping("/bookHistory")
+    public R bookHistory(){
+        return userService.bookHistory();
+    }
+
+    /**
+     *权限测试
+     * @return
+     */
     @RequestMapping("/test")
     @PreAuthorize("hasAuthority('abc')")
     public String Test(){
