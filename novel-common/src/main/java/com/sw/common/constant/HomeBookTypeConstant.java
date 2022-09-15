@@ -38,5 +38,9 @@ public interface HomeBookTypeConstant {
      * 本月点击榜
      */
     Integer HOT_IN_MONTH = 5;
+    /**
+     * 获取 前端cooke 中 token 的名字
+     */
+    String COOKE_TOKEN = "user-Token";
 
 }
