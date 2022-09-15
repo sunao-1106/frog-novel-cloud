@@ -9,6 +9,7 @@
 package com.sw.common.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.sw.common.exception.BizCodeEnum;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -22,7 +23,9 @@ import java.util.Map;
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 
-	public R setData(Object data) {
+
+
+    public R setData(Object data) {
 		this.put("data", data);
 		return this;
 	}
@@ -75,8 +78,8 @@ public class R extends HashMap<String, Object> {
 		super.put(key, value);
 		return this;
 	}
-	public  Integer getCode() {
 
+	public  Integer getCode() {
 		return (Integer) this.get("code");
 	}
 

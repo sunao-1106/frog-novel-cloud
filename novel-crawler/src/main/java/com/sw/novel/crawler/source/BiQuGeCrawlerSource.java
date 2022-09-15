@@ -127,10 +127,11 @@ public class BiQuGeCrawlerSource implements CrawlerSource {
         bookChapterTo.setChapterName(h1.text());
 
         // 获取该章节的索引
+        // TODO 使用这种方式进行章节的排序不可行
         bookChapterTo.setChapterIndex(chapterIndex.indexOf(page.getWebURL().getURL()));
 
         // 获取章节内容
-        List<String> bookContent = new ArrayList<String>();
+        StringBuilder bookContentToString = new StringBuilder();
         long wordCount = 0L;
         Element content = document.getElementById("content");
         Elements p = content.getElementsByTag("p");
@@ -139,13 +140,13 @@ public class BiQuGeCrawlerSource implements CrawlerSource {
             // 计算该章节字数
             wordCount += text.length();
             // 添加分隔符 方便后续截串
-            bookContent.add(text + "/");
+            bookContentToString.append(text + "/");
         }
         bookChapterTo.setWordCount(wordCount);
 
         // 封装章节内容
         BookContentTo bookContentTo = new BookContentTo();
-        bookContentTo.setChapterContent(bookContent.toString());
+        bookContentTo.setChapterContent(bookContentToString.toString());
         bookChapterTo.setBookContentTo(bookContentTo);
         return bookChapterTo;
     }

@@ -1,0 +1,12 @@
+com\sw\common\to\BookContentTo.class
+com\sw\common\utils\JwtUtil.class
+com\sw\common\config\redis\FastJsonRedisSerializer.class
+com\sw\common\exception\BizCodeEnum.class
+com\sw\common\to\BookInfoTo.class
+com\sw\common\utils\R.class
+com\sw\common\to\BookChapterTo.class
+com\sw\common\utils\WebUtils.class
+com\sw\common\constant\HomeBookRedisKey.class
+com\sw\common\constant\HomeBookTypeConstant.class
+com\sw\common\config\redis\RedisConfig.class
+com\sw\common\constant\ClickBookConstant.class

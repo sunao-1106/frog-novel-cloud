@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sw.novel.book.vo.BookChapterVo;
 import com.sw.novel.book.vo.BookDetailVo;
 import io.swagger.annotations.ApiImplicitParam;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class BookInfoServiceImpl extends ServiceImpl<BookInfoMapper, BookInfoEnt
 
     @Autowired
     private BookCommentReplyMapper bookCommentReplyMapper;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public Long saveBookInfo(BookInfoTo bookInfoTo) {
@@ -79,6 +83,8 @@ public class BookInfoServiceImpl extends ServiceImpl<BookInfoMapper, BookInfoEnt
 
     @Override
     public BookDetailVo getBookDetailById(Long id) {
+        // 增加该小说的浏览量
+        this.addViewCount(id);
 
         BookDetailVo bookDetailVo = new BookDetailVo();
 
@@ -101,6 +107,13 @@ public class BookInfoServiceImpl extends ServiceImpl<BookInfoMapper, BookInfoEnt
 
         // TODO 查询当前小说下所有的评论信息
         return bookDetailVo;
+    }
+
+    /**
+     * 增加该小说的浏览量
+     */
+    private void addViewCount(Long bookId) {
+        rabbitTemplate.convertAndSend("book.add.view.exchange", "book.clicked", bookId);
     }
 
 }

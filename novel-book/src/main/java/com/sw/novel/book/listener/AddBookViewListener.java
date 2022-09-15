@@ -44,7 +44,7 @@ public class AddBookViewListener {
         // 每本小说的点击次数达到10 进行一次数据库的写操作
         if (clickedTime >= 10) {
             // 写入数据库 增加该小说的浏览量viewCount
-            log.info("start to add book:{} to database", bookId);
+            log.info("start to add book view count to database, bookId:{}", bookId);
             bookInfoService.addViewCountByBookId(bookId, ClickBookConstant.VIEW_COUNT_ONCE_ADD * clickedTime);
             // 删除该小说点击次数在缓存中的记录
             redisTemplate.delete(ClickBookConstant.BOOK_CLICK_TIME + bookId);

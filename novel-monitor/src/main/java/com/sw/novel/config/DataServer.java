@@ -1,6 +1,8 @@
 package com.sw.novel.config;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.sw.common.exception.BizCodeEnum;
+import com.sw.common.utils.AppException;
 import com.sw.novel.dao.RoleDao;
 import com.sw.novel.dao.UserDao;
 import com.sw.novel.entity.Role;
@@ -41,7 +43,7 @@ public class DataServer implements UserDetailsService {
         User user = userDao.selectOne(queryWrapper);
         if (Objects.isNull(user)) {
             //spring security总会帮我们捕获在其中的 全部异常
-            throw new RuntimeException("用户或密码错误");
+            throw new AppException(BizCodeEnum.USER_PASSWORD);
         }
 
         Role role = roleDao.selectById(user.getUserRole());

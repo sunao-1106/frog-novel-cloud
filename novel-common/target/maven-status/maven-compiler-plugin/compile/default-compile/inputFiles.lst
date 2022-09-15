@@ -1,0 +1,13 @@
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\utils\R.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\config\redis\FastJsonRedisSerializer.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\utils\JwtUtil.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\to\BookContentTo.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\to\BookChapterTo.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\constant\HomeBookTypeConstant.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\config\redis\RedisConfig.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\constant\ClickBookConstant.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\exception\BizCodeEnum.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\utils\WebUtils.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\config\CorsConfig.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\to\BookInfoTo.java
+S:\myProject\小说项目\frog-novel-cloud\novel-common\src\main\java\com\sw\common\constant\HomeBookRedisKey.java

@@ -5,11 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 @SpringBootApplication
 @ComponentScan("com.sw.novel")
 @MapperScan("com.sw.novel.dao")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity
 public class NovelMonitorApplication {
 
     public static void main(String[] args) {

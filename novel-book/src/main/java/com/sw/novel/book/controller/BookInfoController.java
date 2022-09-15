@@ -45,12 +45,12 @@ public class BookInfoController {
         return R.ok().setData(bookInfo);
     }
 
-    @ApiOperation(value = "增加小说浏览量")
-    @PutMapping("/add/{id}")
-    public R addViewCount(@PathVariable("id") Long id) {
-        rabbitTemplate.convertAndSend("book.add.view.exchange", "book.clicked", id);
-        return R.ok();
-    }
+//    @ApiOperation(value = "增加小说浏览量")
+//    @PutMapping("/add/{id}")
+//    public R addViewCount(@PathVariable("id") Long id) {
+//        rabbitTemplate.convertAndSend("book.add.view.exchange", "book.clicked", id);
+//        return R.ok();
+//    }
 
     @ApiOperation("查询最新更新章节小说")
     @GetMapping("/recent")
@@ -59,7 +59,7 @@ public class BookInfoController {
         return R.ok().setData(bookInfoToList);
     }
 
-    @ApiOperation("通过小说id获取其详细信息，包括小说目录章节、小说评论")
+    @ApiOperation(value = "通过小说id获取其详细信息，包括小说目录章节、小说评论", notes = "增加当前小说的浏览量")
     @GetMapping("/detail/{id}")
     public R getBookDetail(@PathVariable("id") Long id) {
         BookDetailVo bookDetailVo = bookInfoService.getBookDetailById(id);
