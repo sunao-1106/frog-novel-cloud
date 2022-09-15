@@ -14,6 +14,7 @@ import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 返回数据
@@ -69,6 +70,10 @@ public class R extends HashMap<String, Object> {
 		r.putAll(map);
 		return r;
 	}
+    public static R ok(Integer code,Objects objects) {
+        R r = new R();
+        return r;
+    }
 
 	public static R ok() {
 		return new R();

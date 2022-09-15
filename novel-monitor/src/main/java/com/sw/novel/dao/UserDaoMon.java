@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @since 2022-09-06 16:09:39
  */
 @Component
-public interface UserDao extends BaseMapper<User> {
+public interface UserDaoMon extends BaseMapper<User> {
 
 }
 

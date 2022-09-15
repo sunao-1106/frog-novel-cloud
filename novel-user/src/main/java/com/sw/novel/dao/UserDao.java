@@ -2,7 +2,9 @@ package com.sw.novel.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sw.novel.entity.User;
+import com.sw.novel.entity.vo.UserVo;
 import org.springframework.stereotype.Component;
+
 
 /**
  * (User)表数据库访问层
@@ -12,6 +14,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface UserDao extends BaseMapper<User> {
-
+//    User UserInfo();
 }
 

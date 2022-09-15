@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sw.common.exception.BizCodeEnum;
 import com.sw.common.utils.AppException;
 import com.sw.novel.dao.RoleDao;
-import com.sw.novel.dao.UserDao;
+import com.sw.novel.dao.UserDaoMon;
 import com.sw.novel.entity.Role;
 import com.sw.novel.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.Objects;
 public class DataServer implements UserDetailsService {
 
     @Autowired
-    private UserDao userDao;
+    private UserDaoMon userDaoMon;
 
     @Autowired
     private RoleDao roleDao;
@@ -40,7 +40,7 @@ public class DataServer implements UserDetailsService {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUsername, username);
 
-        User user = userDao.selectOne(queryWrapper);
+        User user = userDaoMon.selectOne(queryWrapper);
         if (Objects.isNull(user)) {
             //spring security总会帮我们捕获在其中的 全部异常
             throw new AppException(BizCodeEnum.USER_PASSWORD);

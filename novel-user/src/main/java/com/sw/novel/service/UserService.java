@@ -3,6 +3,7 @@ package com.sw.novel.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sw.common.utils.R;
 import com.sw.novel.entity.User;
+import com.sw.novel.entity.vo.UserVo;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -19,5 +20,9 @@ public interface UserService extends IService<User> {
     R outLogin();
 
     R Register(User user);
+
+    R UserInfo();
+
+    R bookHistory();
 }
 
