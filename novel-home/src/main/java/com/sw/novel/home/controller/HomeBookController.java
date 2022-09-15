@@ -32,4 +32,18 @@ public class HomeBookController {
         return R.ok().setData(homeBookVoList);
     }
 
+    @ApiOperation("获取首页精选完本")
+    @GetMapping("/selected")
+    public R getSelectedBooks() {
+        List<HomeBookVo> homeBookVoList = homeBookService.getSelectedBookList();
+        return R.ok().setData(homeBookVoList);
+    }
+
+    @ApiOperation("获取首页本周热度榜小说列表")
+    @GetMapping("/week")
+    public R hotInWeek() {
+        List<HomeBookVo> homeBookVoList = homeBookService.getHotInWeekBookList();
+        return R.ok().setData(homeBookVoList);
+    }
+
 }

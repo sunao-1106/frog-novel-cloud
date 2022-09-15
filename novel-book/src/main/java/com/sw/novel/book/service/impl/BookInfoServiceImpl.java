@@ -1,5 +1,6 @@
 package com.sw.novel.book.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.sw.common.to.BookInfoTo;
 import com.sw.novel.book.entity.BookInfoEntity;
 import com.sw.novel.book.dao.BookInfoMapper;
@@ -38,6 +39,11 @@ public class BookInfoServiceImpl extends ServiceImpl<BookInfoMapper, BookInfoEnt
         BookInfoTo bookInfoTo = new BookInfoTo();
         BeanUtils.copyProperties(this.getById(id), bookInfoTo);
         return bookInfoTo;
+    }
+
+    @Override
+    public void addViewCountByBookId(Long bookId, Integer viewCountOnceAdd) {
+        this.baseMapper.addViewCountByBookId(bookId, viewCountOnceAdd);
     }
 
 }

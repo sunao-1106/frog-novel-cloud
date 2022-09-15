@@ -15,3 +15,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher # 解决swagger在高版本springboot无法访问问题
+  rabbitmq:
+    host: 101.42.157.144
+    port: 5672
+    virtual-host: /
+  redis:
+    host: localhost
+    port: 6379
+    database: 0

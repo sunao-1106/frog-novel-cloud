@@ -27,4 +27,8 @@
         id, book_name, category_id, author_id, author_name, image, description, word_count, view_count, recent_chapter, is_finished, is_free, status, is_deleted, creat_time, update_time
     </sql>
 
+    <insert id="addViewCountByBookId">
+        update book_info set view_count=view_count + #{count} where id=#{id}
+    </insert>
+
 </mapper>

@@ -24,4 +24,10 @@ public interface BookInfoService extends IService<BookInfoEntity> {
      * 根据小说id获取小说信息
      */
     BookInfoTo getBookById(Long id);
+
+    /**
+     * 增加小说浏览量
+     * @param viewCountOnceAdd 每点击一次增加的浏览量
+     */
+    void addViewCountByBookId(Long bookId, Integer viewCountOnceAdd);
 }
