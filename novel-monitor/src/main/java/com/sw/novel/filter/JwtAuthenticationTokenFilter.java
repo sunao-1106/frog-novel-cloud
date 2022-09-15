@@ -1,8 +1,10 @@
-package com.sw.novel.config;
+package com.sw.novel.filter;
 
 import com.sw.common.constant.HomeBookTypeConstant;
 import com.sw.common.utils.JwtUtil;
 
+import com.sw.novel.config.LoginUser;
+import com.sw.novel.config.RedisCache;
 import com.sw.novel.entity.comm.CommUserMin;
 import io.jsonwebtoken.Claims;
 import lombok.Data;

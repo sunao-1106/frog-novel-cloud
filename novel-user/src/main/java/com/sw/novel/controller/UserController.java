@@ -34,8 +34,6 @@ public class UserController extends ApiController {
     UploadService uploadService;
 
 
-
-
     /**
      * 服务对象
      */
