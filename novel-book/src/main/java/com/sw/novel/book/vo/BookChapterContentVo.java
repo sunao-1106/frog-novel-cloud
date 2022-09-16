@@ -29,7 +29,7 @@ public class BookChapterContentVo {
     private String chapterName;
 
     @ApiModelProperty(value = "创建时间")
-    @JsonFormat(pattern = "yyyy.MM.dd HH:mmmm:ss")
+    @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
     private Date createTime;
 
     @ApiModelProperty(value = "章节内容")

@@ -1,5 +1,6 @@
 package com.sw.novel.book.controller;
 
+import com.sw.common.exception.BizCodeEnum;
 import com.sw.common.to.BookChapterTo;
 import com.sw.common.utils.R;
 import com.sw.novel.book.exception.IllegalAccessBookException;
@@ -33,12 +34,13 @@ public class BookChapterController {
     @ApiOperation(value = "查询对应的小说章节的内容", notes = "免费章节")
     @GetMapping("/free/content/{id}")
     public R getChapterContent(@PathVariable("id") Long id) {
+        BookChapterContentVo bookChapterContentVo = null;
         try {
-            BookChapterContentVo bookChapterContentVo = bookChapterService.getFreeChapterContent(id);
+            bookChapterContentVo = bookChapterService.getFreeChapterContent(id);
         } catch (IllegalAccessBookException e) {
-           return R.error();
+           return R.error(BizCodeEnum.ILLEGAL_ACCESS.getCode(), BizCodeEnum.ILLEGAL_ACCESS.getMessage());
         }
-        return R.ok();
+        return R.ok().setData(bookChapterContentVo);
     }
 
 }

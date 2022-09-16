@@ -29,11 +29,13 @@ import java.util.List;
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    // 是否不去设置就不需要权限？
+    // 那么就可以将需求登录之后才能访问的路径设置普通用户权限(不满足则提示登录)
+    // 不需要登录状态就可以访问的路径 不设置权限
     private final String[] normalUserPath = new String[] {
             "/book/info/**",
-            "/book/chapter/**",
-            "/home/book/**"
+            "/book/chapter/**"
+           // "/home/book/**"
     };
 
     private final String[] vipUserPath = new String[] {
@@ -60,11 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //            }
 //        }
         for (String url : normalUserPath) {
-            urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.NORMAL_USER.getSign());
+            // 会员用户也可以访问所有普通用户能访问的
+            urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.NORMAL_USER.getSign(), RoleEnum.VIP_USER.getSign());
         }
 
         for (String url : vipUserPath) {
-            urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.NORMAL_USER.getSign());
+            urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.VIP_USER.getSign());
         }
 
         http.csrf()// 由于使用的是JWT，我们这里不需要csrf
@@ -98,6 +101,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //把token校验过滤器添加到过滤器链中
         http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        // 权限校验失败的处理方法
+        http.exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler());
     }
 
     /**

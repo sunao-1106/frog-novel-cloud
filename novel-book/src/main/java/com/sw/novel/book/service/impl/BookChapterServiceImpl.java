@@ -102,6 +102,13 @@ public class BookChapterServiceImpl extends ServiceImpl<BookChapterMapper, BookC
                             .eq(BookInfoEntity::getId, bookChapterEntity.getBookId())
             );
             vo.setAuthorName(bookInfoEntity.getAuthorName());
+
+            // 查询该章节的内容
+            BookContentEntity bookContentEntity = bookContentMapper.selectOne(
+                    new LambdaQueryWrapper<BookContentEntity>()
+                            .eq(BookContentEntity::getChapterId, id)
+            );
+            vo.setChapterContent(bookContentEntity.getChapterContent());
             return vo;
         }
        return null;

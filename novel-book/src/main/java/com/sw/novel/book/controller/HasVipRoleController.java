@@ -28,7 +28,7 @@ public class HasVipRoleController {
     @GetMapping("/content/{id}")
     public R getChapterContent(@PathVariable("id") Long id) {
         BookChapterContentVo bookChapterContentVo =  bookChapterService.getVipChapterContent(id);
-        return R.ok();
+        return R.ok().setData(bookChapterContentVo);
     }
 
 }
