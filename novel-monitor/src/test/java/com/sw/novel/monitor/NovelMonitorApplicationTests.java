@@ -1,7 +1,5 @@
 package com.sw.novel.monitor;
 
-import com.sw.novel.dao.RoleDao;
-import com.sw.novel.entity.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,14 +24,5 @@ class NovelMonitorApplicationTests {
         System.out.println("=====是否一致====="+matches);
 
     }
-    @Autowired
-    RoleDao roleDao;
-    /**
-     *  测试使用角色表的使用
-     */
-    @Test
-    public void Role_Test(){
-        Role role = roleDao.selectById(1);
-        System.out.println(role);
-    }
+
 }

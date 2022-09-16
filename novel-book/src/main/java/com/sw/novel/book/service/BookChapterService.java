@@ -26,5 +26,11 @@ public interface BookChapterService extends IService<BookChapterEntity> {
      * 查询对应的小说章节的内容
      * 免费章节
      */
-    BookChapterContentVo getFreeChapterContent(Long id) throws IllegalAccessException;
+    BookChapterContentVo getFreeChapterContent(Long id);
+
+    /**
+     * 查询对应的小说章节的内容
+     * 会员章节
+     */
+    BookChapterContentVo getVipChapterContent(Long id);
 }

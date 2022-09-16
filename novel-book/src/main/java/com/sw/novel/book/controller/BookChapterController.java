@@ -2,6 +2,7 @@ package com.sw.novel.book.controller;
 
 import com.sw.common.to.BookChapterTo;
 import com.sw.common.utils.R;
+import com.sw.novel.book.exception.IllegalAccessBookException;
 import com.sw.novel.book.service.BookChapterService;
 import com.sw.novel.book.vo.BookChapterContentVo;
 import io.swagger.annotations.Api;
@@ -34,7 +35,7 @@ public class BookChapterController {
     public R getChapterContent(@PathVariable("id") Long id) {
         try {
             BookChapterContentVo bookChapterContentVo = bookChapterService.getFreeChapterContent(id);
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessBookException e) {
            return R.error();
         }
         return R.ok();

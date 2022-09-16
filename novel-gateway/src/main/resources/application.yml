@@ -24,6 +24,7 @@ spring:
             - Path=/api/home/**
           filters:
             - RewritePath=/api(?<segment>/?.*), /$\{segment}  # 将路径中的api移除掉
+
         - id: book_route
           uri: lb://novel-book
           predicates:

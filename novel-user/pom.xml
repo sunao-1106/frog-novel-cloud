@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.sw</groupId>
-    <artifactId>novel-user</artifactId>
+    <artifactId>novel-userDto</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <name>novel-user</name>

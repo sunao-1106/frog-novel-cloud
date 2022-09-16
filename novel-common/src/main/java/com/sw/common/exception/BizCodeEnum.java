@@ -16,8 +16,11 @@ public enum BizCodeEnum {
     USER_USERNAME(1002,"用户异常"),
     USER_FORMAT(1003,"上传文件格式错误"),
     USER_REGISTER("注册成功,请登录"),
-    USER_REGISTER_ERROR(1005,"注册失败,请重新注册");
-
+    USER_REGISTER_ERROR(1005,"注册失败,请重新注册"),
+    ILLEGAL_ACCESS(1006, "非法访问"),
+    LOGIN_EXPIRED(1007, "登录过期，请重新登录"),
+    UNDEFINED_ERROR(1008, "未知错误，请联系系统管理员"),
+    LACK_OF_PERMISSION(1009, "访问权限不足");
 
     private int code;
     private String message;

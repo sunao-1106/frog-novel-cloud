@@ -35,4 +35,7 @@ public class BookChapterContentVo {
     @ApiModelProperty(value = "章节内容")
     private String chapterContent;
 
+    @ApiModelProperty("是否免费")
+    private Integer isFree;
+
 }

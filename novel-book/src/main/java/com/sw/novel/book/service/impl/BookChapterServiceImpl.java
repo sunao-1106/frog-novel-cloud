@@ -64,20 +64,36 @@ public class BookChapterServiceImpl extends ServiceImpl<BookChapterMapper, BookC
 
     @Override
     public BookChapterContentVo getFreeChapterContent(Long id) {
+        BookChapterContentVo vo = getBookChapterContentVoByChapterId(id);
+        if (vo != null) {
+            if (vo.getIsFree() != 0) {
+                // 该章节需要vip权限（防止恶意通过该接口访问vip小说内容）
+                throw new IllegalAccessBookException();
+            }
+            return vo;
+        }
+       return null;
+    }
+
+    @Override
+    public BookChapterContentVo getVipChapterContent(Long id) {
+        BookChapterContentVo vo = getBookChapterContentVoByChapterId(id);
+        if (vo != null) {
+            return vo;
+        }
+        return null;
+    }
+
+    private BookChapterContentVo getBookChapterContentVoByChapterId(Long id) {
         BookChapterContentVo vo = new BookChapterContentVo();
         // 查询出该章节的信息
         BookChapterEntity bookChapterEntity = this.getById(id);
         if (bookChapterEntity != null) {
-            if (bookChapterEntity.getIsFree() != 0) {
-                // 该章节需要vip权限（防止恶意通过该接口访问vip小说内容）
-                throw new IllegalAccessBookException();
-            }
-
             // 封装参数
             vo.setChapterName(bookChapterEntity.getChapterName());
             vo.setChapterId(bookChapterEntity.getId());
             vo.setCreateTime(bookChapterEntity.getCreateTime());
-
+            vo.setIsFree(bookChapterEntity.getIsFree());
             // TODO 查询该小说对应的分类名称
 
             // 查询该小说的作者姓名
@@ -86,7 +102,10 @@ public class BookChapterServiceImpl extends ServiceImpl<BookChapterMapper, BookC
                             .eq(BookInfoEntity::getId, bookChapterEntity.getBookId())
             );
             vo.setAuthorName(bookInfoEntity.getAuthorName());
+            return vo;
         }
-        return vo;
+       return null;
     }
+
+
 }

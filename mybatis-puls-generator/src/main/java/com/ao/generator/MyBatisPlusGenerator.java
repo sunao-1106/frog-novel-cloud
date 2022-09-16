@@ -54,7 +54,7 @@ public class MyBatisPlusGenerator {
         dsConfig.setDbType(DbType.MYSQL)
                 .setDriverName("com.mysql.cj.jdbc.Driver")
                 //TODO  TODO  TODO  TODO
-                .setUrl("jdbc:mysql://localhost:3306/frog-novel?useSSL=false")
+                .setUrl("jdbc:mysql://101.42.157.144:3306/frog-novel?useSSL=false")
                 .setUsername("root")
                 .setPassword("root");
 
@@ -82,14 +82,17 @@ public class MyBatisPlusGenerator {
 //                        "takeaway_category_setmeal",
 //                        "takeaway_setmeal_dish");
         .setInclude(
-                "home_book",
-                "home_notice"
+                "user",
+                "user_bookself",
+                "user_pay_record",
+                "user_read_history",
+                "role"
         );
         //.setInclude(scanner("表名，多个英文逗号分割").split(","));
 
         //4. 包名策略配置
         PackageConfig pkConfig = new PackageConfig();
-        pkConfig.setParent("com.sw.novel.home")
+        pkConfig.setParent("com.sw.novel.user")
                 .setMapper("dao")
                 .setService("service")
                 .setController("controller")
