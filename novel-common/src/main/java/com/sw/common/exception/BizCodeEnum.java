@@ -20,7 +20,9 @@ public enum BizCodeEnum {
     ILLEGAL_ACCESS(1006, "非法访问"),
     LOGIN_EXPIRED(1007, "登录过期，请重新登录"),
     UNDEFINED_ERROR(1008, "未知错误，请联系系统管理员"),
-    LACK_OF_PERMISSION(1009, "访问权限不足");
+    LACK_OF_PERMISSION(1009, "访问权限不足"),
+    INVALID_TOKEN(1010, "无效的token"),
+    NOT_LOGIN(1011, "请先登录");
 
     private int code;
     private String message;

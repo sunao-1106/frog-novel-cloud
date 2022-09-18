@@ -28,8 +28,6 @@ public class BookInfoController {
     @Autowired
     private BookInfoService bookInfoService;
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
 
     @ApiOperation("添加小说")
     @PostMapping("/saveBook")
@@ -38,21 +36,14 @@ public class BookInfoController {
         return R.ok().setData(bookId);
     }
 
-    @ApiOperation("通过小说id查询小说详细信息")
+    @ApiOperation(value = "通过小说id查询小说详细信息", notes = "Home")
     @GetMapping("/get/{id}")
     public R getBookInfoById(@PathVariable("id") Long id) {
         BookInfoTo bookInfo = bookInfoService.getBookById(id);
         return R.ok().setData(bookInfo);
     }
 
-//    @ApiOperation(value = "增加小说浏览量")
-//    @PutMapping("/add/{id}")
-//    public R addViewCount(@PathVariable("id") Long id) {
-//        rabbitTemplate.convertAndSend("book.add.view.exchange", "book.clicked", id);
-//        return R.ok();
-//    }
-
-    @ApiOperation("查询最新更新章节小说")
+    @ApiOperation(value = "查询最新更新章节小说", notes = "Home")
     @GetMapping("/recent")
     public R getRecentUpdateBook() {
         List<BookInfoTo> bookInfoToList = bookInfoService.getRecentUpdateBookList();

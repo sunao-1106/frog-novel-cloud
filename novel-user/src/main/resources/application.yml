@@ -25,13 +25,4 @@ oss:
   secretKey: V3ahyM8MhqMw_nH-M2vv5w6ENx3MWho94GF5tT7_
   bucket: haiwaifds
 
-role:
-  path:
-    normal-user:  # 设置普通用户可以访问的地址
-      url:
-        - /book/chapter
-        - /home/info
-    vip-user: # 设置会员用户可以访问的地址
-      url:
-        - /book/vip
 

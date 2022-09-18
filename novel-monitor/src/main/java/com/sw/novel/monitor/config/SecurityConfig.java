@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,6 +19,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -29,15 +32,28 @@ import java.util.List;
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    // 是否不去设置就不需要权限？
-    // 那么就可以将需求登录之后才能访问的路径设置普通用户权限(不满足则提示登录)
-    // 不需要登录状态就可以访问的路径 不设置权限
-    private final String[] normalUserPath = new String[] {
-            "/book/info/**",
-            "/book/chapter/**"
-           // "/home/book/**"
+
+    private final String bookInfoBaseUrl = "/book/info";
+
+    private final String bookChapterBaseUrl = "/book/chapter";
+
+    private final String homeBookBaseUrl = "/home/book";
+
+    // TODO 这里可以使用配置文件的方式优化这些路径的配置
+    // 不用登录就可以访问的url
+    private final String[] commonPath = new String[] {
+            bookInfoBaseUrl + "/get/*",
+            bookInfoBaseUrl + "/recent",
+            bookInfoBaseUrl + "/detail/*",
+            homeBookBaseUrl + "/**"
     };
 
+    // 已登录状态的普通用户
+    private final String[] normalUserPath = new String[] {
+            bookChapterBaseUrl + "/free/content/*"
+    };
+
+    // 已登录状态的会员用户
     private final String[] vipUserPath = new String[] {
             "/book/vip/**"
     };
@@ -47,27 +63,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 设置权限路径
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry = http.authorizeRequests();
 
-        // 设置对普通用户可以访问的url
-        // TODO 这种方式会导致空指针异常 原因是每个模块的SecurityConfig配置不是公共的 normalUserPathConfig这些配置只在user模块中定义了 所以启动book模块执行到这里就会报错 空指针
-//        if (normalUserPathConfig().getUrl() != null || vipUserPathConfig().getUrl().size() > 0) {
-//            for (String url :  normalUserPathConfig().getUrl()) {
-//                urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.NORMAL_USER.getSign());
-//            }
-//        }
-
-//        if (vipUserPathConfig().getUrl() != null || vipUserPathConfig().getUrl().size() > 0) {
-//            // 设置会员用户可以访问的url
-//            for (String url :  vipUserPathConfig().getUrl()) {
-//                urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.VIP_USER.getSign());
-//            }
-//        }
-        for (String url : normalUserPath) {
+        for (String url : commonPath) { // 不需要登录即可访问
             // 会员用户也可以访问所有普通用户能访问的
-            urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.NORMAL_USER.getSign(), RoleEnum.VIP_USER.getSign());
+            urlRegistry.antMatchers(url).hasRole("ANONYMOUS").antMatchers();
         }
 
-        for (String url : vipUserPath) {
-            urlRegistry.antMatchers(url).hasAnyAuthority(RoleEnum.VIP_USER.getSign());
+        for (String url : normalUserPath) { // 普通用户
+            // 会员用户也可以访问所有普通用户能访问的
+            urlRegistry.antMatchers(url).hasRole("user.normal"); // 会自动拼接成ROLE_user.normal
+        }
+
+        for (String url : vipUserPath) {    // 会员用户
+            urlRegistry.antMatchers(url).hasRole("user.vip");
         }
 
         http.csrf()// 由于使用的是JWT，我们这里不需要csrf
@@ -104,7 +111,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 权限校验失败的处理方法
         http.exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler());
+                .accessDeniedHandler(accessDeniedHandler())
+                .authenticationEntryPoint(authenticationEntryPoint());
     }
 
     /**
@@ -129,16 +137,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new JwtAuthenticationTokenFilter();
     }
 
-    @Bean
-    public NormalUserPathConfig normalUserPathConfig() {
-        return new NormalUserPathConfig();
-    }
-
-    @Bean
-    public VipUserPathConfig vipUserPathConfig() {
-        return new VipUserPathConfig();
-    }
-
     /**
      * 当权限校验失败时，自定义的返回结果
      */
@@ -151,6 +149,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             response.getWriter().println(JSON.toJSONString(error));
             response.getWriter().flush();
         });
+    }
+
+    /**
+     * 未携带或者携带无效的token访问接口时，自定义的返回结果（未登录）
+     */
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return ((request, response, authException) ->  {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+            R error = R.error(BizCodeEnum.INVALID_TOKEN.getCode(), BizCodeEnum.INVALID_TOKEN.getMessage());
+            // 转化为json格式返回
+            response.getWriter().println(JSON.toJSONString(error));
+            response.getWriter().flush();
+        });
+    }
+
+    /**
+     * 角色权限继承关系
+     */
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        String hierarchy = "ROLE_admin > ROLE_user.vip > ROLE_user.normal > ROLE_ANONYMOUS";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
     }
 
 }

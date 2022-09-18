@@ -26,13 +26,11 @@ import java.util.Objects;
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-
     @Autowired
     private RedisTemplate redisTemplate;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // TODO 过滤器会拦截静态资源 比如访问swagger接口的时候 不携带token可以访问 携带错误或过期的token不可以访问
         //token 的值
         //获取token
         Cookie[] cookies = request.getCookies();
@@ -40,6 +38,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String TOKEN_VALUE = "";
 
         if (cookies != null && cookies.length > 0) {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
             for (Cookie cookie : cookies) {
                 //       System.out.println(cookie.getName()+"==="+cookie.getValue());
                 if (HomeBookTypeConstant.COOKE_TOKEN.equals(cookie.getName())) {
@@ -51,8 +51,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                         //通过解析token得到的用户id
                         claims = JwtUtil.parseJWT(TOKEN_VALUE);
                     } catch (Exception e) {
-                        response.setCharacterEncoding("UTF-8");
-                        response.setContentType("application/json");
                         if (e instanceof ExpiredJwtException) { // token已过期
                             R error = R.error(BizCodeEnum.LOGIN_EXPIRED.getCode(), BizCodeEnum.LOGIN_EXPIRED.getMessage());
                             // 转换为JSON格式返回
@@ -73,7 +71,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                     Object o = redisTemplate.opsForValue().get(redisKey);
                     LoginUser loginUser = JSON.parseObject(JSON.toJSONString(o), LoginUser.class);
                     if (Objects.isNull(loginUser)) {
-                        throw new RuntimeException("用户未登录");
+                        R error = R.error(BizCodeEnum.NOT_LOGIN.getCode(), BizCodeEnum.NOT_LOGIN.getMessage());
+                        // 转换为JSON格式返回
+                        response.getWriter().println(JSON.toJSON(error));
                     }
                     //  存入SecurityContextHolder
                     //  获取权限信息封装到Authentication中
